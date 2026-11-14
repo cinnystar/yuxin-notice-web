@@ -152,7 +152,6 @@ function renderBoard(main){
   const yp=el(`<section class="panel"><div class="panel-h"><h2>歷年通報件數</h2><p>民國年 · 點長條切換年度</p></div></section>`);
   yp.append(barChart(years().slice().reverse().map(y=>({label:String(roc(y)),key:y,value:NOTICES.filter(n=>n.year===y).length})),{onPick:y=>{setYear(y);route()},hiKey:YEAR,tipFn:x=>`<b>${x.label} 年（${x.key}）</b>　${x.value} 筆`}));
   g.append(yp);
-  main.append(g);
 
   const g2=el('<div class="grid2"></div>');
   const up=el('<section class="panel"><div class="panel-h"><h2>發文單位排行</h2><p>前 12 名 · 點單位看清單</p></div><div class="hbars"></div></section>');
@@ -171,6 +170,7 @@ function renderBoard(main){
   const lp=el('<section class="panel"><div class="panel-h"><h2>最新通報</h2><p>最近 10 筆</p></div></section>');
   lp.append(noticeTable(list.slice(0,10)));
   main.append(lp);
+  main.append(g);   // 每月／歷年通報件數放在最新通報下方
 }
 
 // ---------- 年度總表 ----------
